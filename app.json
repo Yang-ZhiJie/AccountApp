@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/footer/footer",
+    "pages/index2/index2",
+    "pages/accountsets/account",
+    "pages/accountbook/accountbook",
+    "pages/index3/index3",
+    "pages/null/null",
+    "pages/index4/index4",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/addaccount/addaccount",
+    "pages/updateaccount/updateaccount",
+    "pages/userinfo/userinfo",
+    "pages/password/setpassword",
+    "pages/infomation/userinfo",
+    "pages/accounttype/accounttype",
+    "pages/feedback/feedback",
+    "pages/addbook/addbook",
+    "pages/setaccount/setaccount"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "ColorUI",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,103 @@
+<!--pages/addaccount/addaccount.wxml-->
+<view class='navContent' style='height:{{navH}}px'>
+  <navigator class='title_icon' url="/pages/index/index" open-type="redirect">
+    <icon class="cuIcon-back"></icon>
+    <text class="titlefont">返回</text>
+  </navigator>
+  <view class='title_text'>
+    记一笔
+  </view>
+</view>
+<scroll-view scroll-x class="bg-white nav text-center" style="margin-top:90px;">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{way}}" wx:key bindtap="tabSelect" data-id="{{index}}" style="width:120px;">
+    {{way[index]}}
+  </view>
+</scroll-view>
+
+<!-- 未登录状态 -->
+  <view class="main" wx:if="{{token==''}}">
+  <view class="icon">
+    <text class="cuIcon-all"></text>
+  </view>
+  <view class="icontext">
+    <text>还没登录，赶紧登录记一笔吧!</text>
+  </view>
+  <navigator class="padding flex flex-direction" url="/pages/login/login" hover-class="none">
+    <button class="cu-btn lg bg-grey" style="background-color:#ABA9AC">点击登录</button>
+  </navigator>
+</view>
+
+<!-- 登录状态 -->
+<view class="cu-list grid col-{{gridCol}} {{gridBorder}}" style="margin-top:20px;" wx:if="{{token!=''}}">
+  <view class="cu-item" wx:for="{{accounttype}}" wx:key bindtap="showModal" data-target="bottomModal" data-typeid="{{item.id}}">
+    <view class="cuIcon-all text-gray">
+    </view>
+    <text>{{item.name}}</text>
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap="uploadAccountBook">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group">
+        <view class="title">记账金额</view>
+        <input placeholder="输入金额" bindinput="jizhang"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">实付金额</view>
+        <input placeholder="实付" bindinput="shifu"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">交易对象</view>
+        <input placeholder="允许为空" bindinput="addTarget"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">账本选择</view>
+        <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+          <view class="picker">
+            <!-- {{index?picker[index]:'点击选择'}} -->
+            <!-- {{index?picker[index]:'nihao'}} -->
+            {{pickerIndex?picker[pickerIndex]:'请选择'}}
+            <!-- {{index?picker[index]:'禁止换行，超出容器部分会以 ... 方式截断'}} -->
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">日期选择</view>
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group align-start">
+        <view class="title">账本备注</view>
+        <textarea maxlength="-1" placeholder="多行文本输入框" bindinput="remarks"></textarea>
+      </view>
+      <view class="cu-bar bg-white margin-top">
+        <view class="action">
+          图片上传
+        </view>
+        <view class="action">
+          {{imgList.length}}/4
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+            <image src='{{imgList[index]}}' style="top:0;left:0;"  mode='aspectFill'></image>
+            <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+              <text class="cuIcon-close"></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="chooseImage" wx:if="{{imgList.length<4}}">
+            <text class="cuIcon-cameraadd"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

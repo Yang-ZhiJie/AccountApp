@@ -1,0 +1,114 @@
+<!--pages/index2/index2.wxml-->
+<import src="../footer/footer.wxml" />
+<!-- 头部 -->
+<view class='nav-content' style='height:{{navH}}px;'>
+  <view class="nav-content-bottom">
+    <view class='title_icon' bindtap="showModal" data-target="DrawerModalL">
+      <icon class="cuIcon-searchlist"></icon>
+    </view>
+    <view class='title_text'>
+      <view class="col">
+        <view class="col1">
+          <text>支出</text>
+        </view>
+        <view class="col2">
+          <text>收入</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 年月日 -->
+<view class="bg-green nav" style="margin-top:90px;">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-white cur':''}} text-white" wx:for="{{3}}" wx:key bindtap="tabSelectDate" data-id="{{index}}">
+      {{selectDate[index]}}
+    </view>
+  </view>
+</view>
+
+<!-- 日期 -->
+<scroll-view scroll-x class="nav bg-white" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabMon?' text-green cur':''}} text-green" wx:for="{{11}}" wx:key bindtap="tabSelectMonth" data-id="{{index}}">
+    <view class="cu-item-font">{{selectMonth[index]}}</view>
+  </view>
+</scroll-view>
+
+<!-- 左边弹框 -->
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal" style="top:80px;">
+  <view class="cu-dialog basis-lg">
+    <view class="cu-list menu text-left">
+      <view class="menu-title">
+        <view class="menu-content">
+          <text class="cuIcon-titles"></text>
+          <text class="menu-font">选择账本</text>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">
+          <icon class="cuIcon-profile"></icon>个人账本</view>
+        <checkbox class="round"></checkbox>
+      </view>
+      <view class="menu-title">
+        <view class="menu-content">
+          <text class="cuIcon-titles"></text>
+          <text class="menu-font">选择图表</text>
+        </view>
+      </view>
+      <!-- 单选 -->
+      <radio-group class="block">
+        <view class="cu-form-group">
+          <view class="title">
+            <icon class="iconfont icon-zhuyuanhaozhanbi"></icon>圆饼图</view>
+          <radio checked></radio>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">
+            <icon class="iconfont icon-tubiaotongji"></icon>折线图</view>
+          <radio checked></radio>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">
+            <icon class="iconfont icon-tubiao"></icon>
+            柱状图</view>
+          <view>
+            <radio checked></radio>
+          </view>
+        </view>
+      </radio-group>
+
+      <view class="confirm">
+        <view class="conrow">
+          <view class="concol">
+            <icon class="cuIcon-close">关闭</icon>
+          </view>
+          <view class="concol">
+            <icon class="cuIcon-check">确认</icon>
+          </view>
+
+        </view>
+      </view>
+
+      <navigator class="content-footer" url="/pages/accountsets/account">
+        <text class="cuIcon-settings">账本设置</text>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 主体内容 -->
+<view class="main">
+  <view class="main1">s</view>
+  <view class="main2">
+    <view class="main2-content">
+      <view class="icon">
+        <text class="cuIcon-all"></text>
+      </view>
+      <view class="icontext">
+        <text>暂无数据，赶紧记一笔吧!</text>
+      </view>
+    </view>
+  </view>
+</view>
+<template is="Footer" />

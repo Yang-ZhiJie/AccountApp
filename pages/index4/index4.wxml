@@ -1,0 +1,92 @@
+<!--pages/index4/index4.wxml-->
+<import src="../footer/footer.wxml" />
+
+<scroll-view scroll-y class="scrollPage">
+  <!-- 登录头像和名字 -->
+  <view class="UCenter-bg">
+    <image src="{{avatar_url}}" class="png" mode="aspectFill"></image>
+    <view class="text-xl">{{nickname}}
+    </view>
+    <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+
+  <!-- 状态栏 -->
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-orange">{{visitTotal}}</view>
+      <view class="margin-top-sm">
+        已邀请</view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-blue">{{starCount}}</view>
+      <view class="margin-top-sm">
+        总账本</view>
+    </view>
+    <view class="flex flex-sub flex-direction">
+      <view class="text-xxl text-green">{{forksCount}}</view>
+      <view class="margin-top-sm">
+        共记账</view>
+    </view>
+  </view>
+
+  <!-- 跳转 -->
+  <view class="cu-list menu sm-border margin-top" wx-if="{{show==0}}">
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/login/login" open-type="redirect">
+        <text class="cuIcon-vip text-green"></text>
+        <text class="text-grey">登录</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/register/register" open-type="redirect">
+        <text class="cuIcon-vip text-green"></text>
+        <text class="text-grey">注册</text>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="cu-list menu sm-border margin-top" wx-if="{{logout==0}}">
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/infomation/userinfo" open-type="redirect">
+        <text class="cuIcon-newshot text-green"></text>
+        <text class="text-grey">个人信息</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/password/setpassword" open-type="redirect">
+        <text class="cuIcon-service text-green"></text>
+        <text class="text-grey">密码设置</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/userinfo/userinfo" open-type="redirect">
+        <text class="cuIcon-comment text-green"></text>
+        <text class="text-grey">手机设置</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/setaccount/setaccount" open-type="redirect">
+        <text class="cuIcon-comment text-green"></text>
+        <text class="text-grey">账户设置</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/feedback/feedback" open-type="redirect">
+        <text class="cuIcon-comment text-green"></text>
+        <text class="text-grey">意见反馈</text>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="cu-list menu sm-border margin-top" wx-if="{{logout==0}}">
+    <view class="cu-item arrow" bindtap="clearToken">
+      <view class="content" hover-class="none" open-type="redirect">
+        <text class="cuIcon-exit text-green"></text>
+        <text class="text-grey">退出登录</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
+
+<template is="Footer"/>

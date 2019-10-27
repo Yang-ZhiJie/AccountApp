@@ -1,0 +1,16 @@
+<!--pages/feedback/feedback.wxml-->
+<view class='navContent' style='height:{{navH}}px;z-index:99'>
+  <navigator class='title_icon' url="/pages/index/index">
+    <icon class="cuIcon-back"></icon>
+    <text class="titlefont">返回</text>
+  </navigator>
+  <view class='title_text'>
+    意见反馈
+  </view>
+</view>
+<view class="cu-form-group" style="margin-top:100px;">
+		<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaAInput" placeholder="感谢您的每一条意见和建议，如果被采纳，将有机会获得终身最高福利奖励"></textarea>
+	</view>
+  <view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" bindtap="uploadFeedBack">提交</button>
+</view>

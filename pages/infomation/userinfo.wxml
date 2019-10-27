@@ -1,0 +1,72 @@
+<!--pages/infomation/userinfo.wxml-->
+<view class='nav-content' style='height:{{navH}}px;'>
+  <view class="nav-content-bottom">
+    <navigator class='title_icon' url="/pages/index4/index4">
+      <icon class="cuIcon-back"></icon>
+    </navigator>
+    <view class='title_text'>
+      个人信息
+    </view>
+  </view>
+</view>
+
+<!-- 头像和用户名 -->
+<view class="cu-list menu-avatar" style="margin-top:130px;">
+  <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{1}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+    <view class="cu-avatar round lg" style="background-image:url({{imgs}});"></view>
+    <view class="content">
+      <view class="text-grey">{{nickname}}</view>
+    </view>
+    <view class="move">
+      <!-- <view class="bg-grey">修改信息</view> -->
+      <view class="bg-red" bindtap="showModal" data-target="bottomModal">修改信息</view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap="hideModal">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group margin-top">
+        <view class="title">用户名</view>
+        <input placeholder="修改用户名" bindinput="getnickname"></input>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-bar bg-white">
+        <view class="action">
+          头像上传
+        </view>
+        <view class="action">
+          {{imgList.length}}/1
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+            <image src='{{imgList[index]}}' mode='aspectFill'></image>
+            <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+              <text class="cuIcon-close"></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="chooseImage" wx:if="{{imgList.length<4}}">
+            <text class="cuIcon-cameraadd"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 修改个人信息点击事件 -->
+<view class="formtable">
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-green margin-tb-sm lg" role="button" aria-disabled="false" bindtap="updateUserInfo">点击修改</button>
+  </view>
+  <navigator class="padding flex flex-direction" wx-if="{{show==1}}" url="/pages/login/login">
+    <button class="cu-btn bg-blue margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goRegister">修改成功 点击登录</button>
+  </navigator>
+
+</view>

@@ -1,0 +1,23 @@
+<!--pages/index3/index3.wxml-->
+<import src="../footer/footer.wxml" />
+<!-- 头部 -->
+<view class='nav' style='height:{{navH}}px'>
+  <view class='title_icon'>
+    <text class="cuIcon-share"></text>
+  </view>
+  <view class='title_text' style="display:inline-block;">
+    影响力
+  </view>
+</view>
+
+<!-- 周期榜 -->
+<view class="bg-white nav" style="margin-top:90px;">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-white cur':''}} text-white" wx:for="{{3}}" wx:key bindtap="tabSelectDate" data-id="{{index}}">
+      {{selectDate[index]}}
+    </view>
+  </view>
+</view>
+
+<!-- 页脚 -->
+<template is="Footer" />

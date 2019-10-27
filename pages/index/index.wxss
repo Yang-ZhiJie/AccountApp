@@ -1,0 +1,179 @@
+.nav {
+  width: 100%;
+  /* overflow: hidden; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* z-index: 10; */
+  background:#3AB44A;
+  /* display: flex; */
+
+}
+
+
+.title_text {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  font-size: 20px;
+  color: #fff;
+}
+ 
+.title_icon {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  box-sizing: border-box;
+  z-index: 20;
+  
+}
+.title_icon text{
+  font-size: 35rpx;
+  color: #fff;
+  font-weight: bolder;
+}
+.nav-item{
+  /* margin-top: 90px; */
+  width: 100%;
+  height: 80px;
+  display: flex;
+  position: fixed;
+  top: 90px;
+  /* z-index: -10; */
+}
+.navior{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  position: fixed;
+  top: 90px;
+}
+.nav-item .item{
+  flex: 1;
+  /* border: 1px solid black; */
+  background: #3AB44A;
+  
+}
+.navior .item1{
+  flex: 1;
+  /* border: 1px solid black; */
+}
+.nav-item .item .text1{
+  display: block;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 16px;
+  color: #fff;
+}
+.nav-item .item .text2{
+  margin-left: 20px;
+  /* font-size: 13px; */
+  color: #fff;
+}
+.nav-item .item .text2 .bt{
+  font-size:25px;
+}
+.nav-item .item .text2 .st{
+  font-size:16px;
+}
+.navior{
+  height: 40px;
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  margin-top: 80px;
+}
+.navior .item1{
+  margin-left: 25px;
+  
+  /* display: inline-block; */
+}
+ .item1 text{
+  font-size: 25px;
+  color: #A9AAA9;
+  line-height: 40px;
+  /* font-weight: bold; */
+}
+.main{
+  width: 100%;
+  height: 700px;
+  background: #F1F1F1;
+  margin-top: 210px;
+}
+.main .icontent{
+  width: 80%;
+  /* display: flex; */
+  
+  
+}
+.icon{
+  /* margin: 0 auto; */
+  line-height: 400px;
+  text-align: center;
+  font-size: 100px;
+  color: #AAAAAA;
+}
+.icontext{
+  font-size: 16px;
+    color: #AAAAAA;
+margin-top: -150px;
+text-align: center;
+}
+.menu-title{
+  height: 40px;
+}
+.menu-content{
+  line-height: 40px;
+}
+.cuIcon-titles{
+  color: #3AB44A;
+  font-size: 18px;
+  margin-left: 15px;
+}
+.menu-font{
+  font-size: 16px;
+  color: #AAAAAA;
+  margin-left: 5px;
+}
+.content-proflie{
+  color: #3AB44A;
+  margin-left: 7px;
+}
+.content-footer{
+  width: 90%;
+  border: 1px solid #3AB44A;
+  float: left;
+  margin-left: 12px;
+  margin-top:95%;
+  text-align: center;
+  color: #3AB44A;
+}
+.mainContent .accountdetails{
+  height: 30px;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+.date{
+  float: left;
+  line-height: 30px;
+  /* left: 20px; */
+  margin-left: 10px;
+  color: #B9B9B9;
+  font-size: 13px;
+}
+.money{
+  float: right;
+  line-height: 30px;
+  margin-right: 10px;
+  color: #B9B9B9;
+  font-size: 13px;
+}
+.payment{
+  height: 70px;
+  background: #fff;
+}

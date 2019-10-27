@@ -1,0 +1,72 @@
+<!--pages/setaccount/setaccount.wxml-->
+<view class='navContent' style='height:{{navH}}px;z-index:99'>
+  <navigator class='title_icon' url="/pages/index/index">
+    <icon class="cuIcon-back"></icon>
+    <text class="titlefont">返回</text>
+  </navigator>
+  <view class='title_text'>
+    账户设置
+  </view>
+</view>
+<!-- <view class="cu-list menu sm-border">
+  <view class="cu-item arrow" wx:for="{{accountList}}" wx:key>
+    <navigator class="content" hover-class="none" url="/pages/infomation/userinfo" open-type="redirect">
+      <text class="cuIcon-newshot text-green"></text>
+      <text class="text-grey">{{item.name}}</text>
+    </navigator>
+  </view>
+</view> -->
+
+  <view class="cu-list menu-avatar" style="margin-top:80px;" wx:if="{{token!=''}}">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" wx:for="{{accountList}}" wx:key>
+
+      <view class="content">
+        <view class="">
+          <icon class="cuIcon-profile text-grey"></icon>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="action">
+        <!-- <view class="text-grey text-xs">22:20</view> -->
+        <icon class="cuIcon-sort text-xs text-grey"></icon>
+      </view>
+      <view class="move">
+        <!-- <view class="bg-white text-grey">成员</view> -->
+        <view class="bg-grey" data-accountid='{{item.id}}' bindtap="updateAccount" data-target="bottomModal">修改</view>
+        <view class="bg-red" bindtap="deleteAccount" data-accountid='{{item.id}}'>删除</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" wx:for="{{accountList}}" wx:key>
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap="updateBook">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group">
+        <view class="title">修改账簿名称</view>
+        <input placeholder="{{item.name}}" bindinput="bookname"></input>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+<view class="row">
+  <view class="col">
+    <view class="col1">
+      <icon class="cuIcon-post"></icon>
+      <text class="col1-font">保存排序</text>
+    </view>
+    <view class="col2" bindtap="goaddaccount">
+      <icon class="cuIcon-add"></icon>
+      <text class="col2-font">添加账户</text>
+    </view>
+  </view>
+</view>

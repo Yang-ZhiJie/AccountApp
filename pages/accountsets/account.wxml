@@ -1,0 +1,79 @@
+<!--pages/accountsets/account.wxml-->
+<view class='nav' style='height:{{navH}}px'>
+  <navigator class='title_icon' url="/pages/index/index">
+    <icon class="cuIcon-back"></icon>
+    <text class="titlefont">返回</text>
+  </navigator>
+  <view class='title_text'>
+    账本设置
+  </view>
+</view>
+<view class="main-title">
+  <view class="menu-title">
+    <view class="menu-content">
+      <text class="cuIcon-titles"></text>
+      <text class="menu-font">首页默认加载排序第一的账本明细</text>
+    </view>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="main" wx:if="{{token==''}}">
+    <view class="icon">
+      <text class="cuIcon-all"></text>
+    </view>
+    <view class="icontext">
+      <text>还没登录，赶紧登录记一笔吧!</text>
+    </view>
+    <navigator class="padding flex flex-direction" url="/pages/login/login" hover-class="none">
+      <button class="cu-btn lg bg-grey" style="background-color:#ABA9AC">点击登录</button>
+    </navigator>
+  </view>
+  <!-- 划框 -->
+  <view class="cu-list menu-avatar" style="margin-top:80px;" wx:if="{{token!=''}}">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" wx:for="{{accountList}}" wx:key>
+
+      <view class="content">
+        <view class="">
+          <icon class="cuIcon-profile text-grey"></icon>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="action">
+        <!-- <view class="text-grey text-xs">22:20</view> -->
+        <icon class="cuIcon-sort text-xs text-grey"></icon>
+      </view>
+      <view class="move">
+        <view class="bg-white text-grey">成员</view>
+        <view class="bg-grey" data-bookid='{{item.id}}' bindtap="showModal2" data-target="bottomModal">修改</view>
+        <view class="bg-red" bindtap="deleteBook" data-bookid='{{item.id}}'>删除</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" wx:for="{{accountList}}" wx:key>
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap="updateBook">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group">
+        <view class="title">修改账簿名称</view>
+        <input placeholder="{{item.name}}" bindinput="bookname"></input>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 底部flex -->
+<view class="row">
+  <view class="col">
+    <view class="col1">
+      <icon class="cuIcon-post"></icon>
+      <text class="col1-font">保存排序</text>
+    </view>
+    <view class="col2" bindtap="goaddbook">
+      <icon class="cuIcon-add"></icon>
+      <text class="col2-font">添加账簿</text>
+    </view>
+  </view>
+</view>

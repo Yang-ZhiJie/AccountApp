@@ -1,0 +1,206 @@
+<import src="../footer/footer.wxml" />
+<view class='nav' style='height:{{navH}}px'>
+  <view class='title_icon' bindtap="showModal" data-target="DrawerModalL">
+    <text class="iconfont icon-daohang"></text>
+  </view>
+  <view class='title_text' style="display:inline-block;">
+    一起记账
+  </view>
+</view>
+<!-- 弹窗 -->
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal" style="top:80px;">
+  <view class="cu-dialog basis-lg">
+    <view class="cu-list menu text-left">
+      <view class="menu-title">
+        <view class="menu-content">
+          <text class="cuIcon-titles"></text>
+          <text class="menu-font">切换账簿明细</text>
+        </view>
+      </view>
+      <scroll-view class="cu-item arrow" wx:for="{{accountList}}" wx:key bindtap="getAccountDetailsSec" data-bookid='{{item.id}}'>
+        <view class="content">
+          <view class="content-proflie">
+            <text class="cuIcon-profile"></text> {{item.name}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <navigator class="content-footer" url="/pages/accountsets/account" wx:if="{{token!=''}}">
+      <text class="cuIcon-settings">账簿设置</text>
+    </navigator>
+    <navigator class="content-footer" url="/pages/login/login" wx:if="{{token==''}}">
+      <text class="cuIcon-settings">点击登录</text>
+    </navigator>
+  </view>
+</view>
+
+<!--正文-->
+<view class="container" style="margin-top: {{navH}}px">
+  <view class="nav-item">
+    <view class="item">
+      <view>
+        <text class="text1">{{data.year}}年</text>
+      </view>
+      <view class="text2">
+        <picker mode="date" value="{{date}}" start="2019-01" end="2020-09" bindchange="bindDateChange" fields="month">
+          <view class="picker">
+            <!-- 当前选择: {{date}} -->
+            <text class="bt">{{data.month}}</text>
+            <text class="st">月</text>
+            <icon class="cuIcon-triangledownfill "></icon>
+          </view>
+        </picker>
+
+      </view>
+
+    </view>
+    <view class="item">
+      <view>
+        <text class="text1">收入</text>
+      </view>
+      <view class="text2">
+        <text class="bt">{{accountTotalIn[0]}}</text>
+        <text class="st">.{{accountTotalIn[1]}}</text>
+      </view>
+    </view>
+    <view class="item">
+      <view>
+        <text class="text1">支出</text>
+      </view>
+      <view class="text2">
+        <text class="bt">{{accountTotalOut[0]}}</text>
+        <text class="st">.{{accountTotalOut[1]}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="navior">
+    <navigator class="item1" url="/pages/accounttype/accounttype">
+      <text class="cuIcon-apps"></text>
+    </navigator>
+    <view class="item1">
+      <text class="iconfont icon-rili"></text>
+    </view>
+    <view class="item1">
+      <text class="iconfont icon-zhuyuanhaozhanbi"></text>
+    </view>
+    <view class="item1">
+      <text class="iconfont icon-tubiaotongji"></text>
+    </view>
+    <view class="item1">
+      <text class="iconfont icon-tubiao"></text>
+    </view>
+  </view>
+</view>
+<!-- 未登录状态 -->
+<view class="main" wx:if="{{token==''}}">
+  <view class="icon">
+    <text class="cuIcon-all"></text>
+  </view>
+  <view class="icontext">
+    <text>还没登录，赶紧登录记一笔吧!</text>
+  </view>
+  <navigator class="padding flex flex-direction" url="/pages/login/login" hover-class="none">
+    <button class="cu-btn lg bg-grey" style="background-color:#ABA9AC">点击登录</button>
+  </navigator>
+</view>
+
+<!-- 登录状态 -->
+<view style="margin-top:210px;" wx:if="{{token!=''}}">
+<!-- 账本有数据 -->
+  <view class="mainContent" wx:for="{{pageSource}}" wx:key bindtap="showModal2" data-target="bottomModal" data-accountid='{{item.record_id}}'  data-accountbook='{{item.account_id}}' wx:if="{{pageSource.length>=0}}">
+    <view class="accountdetails">
+      <view class="date">
+        {{item.date}}
+      </view>
+      <view class="money">
+        {{item.type == 1?'收入':'支出'}}:{{item.money}}
+      </view>
+    </view>
+
+    <view class="cu-list menu-avatar" style="width:100%;">
+      <view class="cu-item">
+        <view class="content">
+          <view class="text-black text-bg" style="margin-left:-50px;">
+            <icon class="cuIcon-all"></icon>
+            {{item.company_name}}
+          </view>
+        </view>
+        <view class="action">
+          <view class="text-black text-bg">{{item.money}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+<!-- 账本无数据 -->
+<view class="main" wx:if="{{pageSource.length==0}}">
+  <view class="icon">
+    <text class="cuIcon-all"></text>
+  </view>
+  <view class="icontext">
+    <text>还没数据，赶紧记一笔吧!</text>
+  </view>
+  </view>
+</view>
+
+<!-- 修改账单详情 -->
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" wx:for="{{returnSource}}" wx:key>
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap="updateAccountBook">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group">
+        <view class="title">修改记账金额</view>
+        <input placeholder="{{returnSource.total_money}}" bindinput="jizhang"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">修改实付金额</view>
+        <input placeholder="{{returnSource.paid_money}}" bindinput="shifu"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">修改交易对象</view>
+        <input placeholder="{{returnSource.company_name}}" bindinput="addTarget"></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">修改记账日期</view>
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+          <view class="picker">
+            {{date}}{{returnSource.date}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group align-start">
+        <view class="title">修改账本备注</view>
+        <textarea maxlength="-1" placeholder="{{returnSource.remark}}" bindinput="remarks"></textarea>
+      </view>
+      <view class="cu-bar bg-white margin-top">
+        <view class="action">
+          图片修改
+        </view>
+        <view class="action">
+          {{imgList.length}}/4
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+            <image src='{{imgList[index]}}' style="top:0;left:0;" mode='aspectFill'></image>
+            <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+              <text class="cuIcon-close"></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="chooseImage" wx:if="{{imgList.length<4}}">
+            <text class="cuIcon-cameraadd"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="padding flex flex-direction">
+      <button class="cu-btn bg-green lg" bindtap="uploadAccountBook">保存并确认</button>
+      <button class="cu-btn bg-red margin-tb-sm lg" bindtap="deleteAcoount">删除记账</button>
+    </view>
+  </view>
+</view>
+<template is="Footer" />

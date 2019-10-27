@@ -1,0 +1,62 @@
+/* pages/addaccount/addaccount.wxss */
+.navContent {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+  background:#3AB44A;
+  text-align: center;
+  z-index: 99
+}
+
+ .navContent .title_text {
+  margin-top: 50px;
+  font-size: 20px;
+  color: #fff;
+  display: inline-block;
+}
+ 
+.title_icon {
+  margin-left: 10px;
+  margin-top: 50px;
+  position: absolute;
+}
+.title_icon .cuIcon-back{
+  font-size: 20px;
+  color: #fff;
+  padding-right: 5px;
+  /* font-weight: bolder; */
+}
+ .titlefont{
+  /* position: absolute; */
+  margin-top:4px;
+  font-size: 16px;
+  color: #fff;
+}
+.main {
+  width: 100%;
+  height: 700px;
+  background: #f1f1f1;
+  /* margin-top: 110px; */
+}
+
+.main .icontent {
+  width: 80%;
+}
+
+.icon {
+  /* margin: 0 auto; */
+  line-height: 400px;
+  text-align: center;
+  font-size: 100px;
+  color: #aaa;
+}
+
+.icontext {
+  font-size: 16px;
+  color: #aaa;
+  margin-top: -150px;
+  text-align: center;
+}
