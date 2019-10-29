@@ -1,26 +1,19 @@
 <!--pages/login/login.wxml-->
 <view class='nav-content' style='height:{{navH}}px;'>
   <view class="nav-content-bottom">
-    <navigator class='title_icon' url="/pages/index4/index4">
+    <navigator class='title_icon' url="/pages/index4/index4" open-type="redirect" hover-class="none">
       <icon class="cuIcon-back"></icon>
     </navigator>
     <view class='title_text'>
-      <view class="col">
-        <view class="col1">
-          <text>登录</text>
-        </view>
-        <view class="col2">
-          <text>注册</text>
-        </view>
-      </view>
+          注册
     </view>
   </view>
 </view>
-<view class="formtable">
+<view class="formtable" style="margin-top:{{navH+10}}px;">
   <form class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
     <view class="cu-form-group card-menu">
       <view class="title">手机号</view>
-      <input placeholder="输入手机号" maxlength="11" bindinput="phoneNum"></input>
+      <input placeholder="长度为11位" maxlength="11" bindinput="phoneNum"></input>
     </view>
     <view class="cu-form-group card-menu">
       <view class="title">用户名</view>
@@ -30,23 +23,20 @@
       <view class="title">登录密码</view>
       <input placeholder="设置密码" password="true" bindinput="passWord"></input>
     </view>
-    <view class="cu-form-group">
+    <view class="cu-form-group" wx:if="{{modalName=='bottomModal'?'show':''}}">
       <view class="title">图形验证码</view>
       <input placeholder="图片内容" bindinput="imgCode"></input>
       <image class="codeimgs" src="{{imgsurl}}"></image>
-      <button class="cu-btn bg-green shadow" role="button" aria-disabled="false" bindtap="getImgs">获取图形</button>
+      <!-- <button class="cu-btn bg-green shadow" role="button" aria-disabled="false" bindtap="getImgs">获取图形</button> -->
     </view>
     <view class="cu-form-group">
       <view class="title">手机验证码</view>
       <input placeholder="输入验证码" bindinput="getTextCode"></input>
-      <button class="cu-btn bg-green shadow" role="button" aria-disabled="false" bindtap="getPhoneNum">点击获取</button>
+      <button class="cu-btn bg-green shadow" role="button" aria-disabled="false" bindtap="getPhoneNum1" data-target="bottomModal">点击获取</button>
     </view>
     <view class="padding flex flex-direction margin-top">
-    <button class="cu-btn bg-green margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goRegister">点击注册</button>
+    <button class="cu-btn bg-green margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goRegister1">点击注册</button>
     </view>
-    <navigator class="padding flex flex-direction" wx-if="{{show==1}}" url="/pages/login/login">
-    <button class="cu-btn bg-blue margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goRegister">注册成功 点击登录</button>
-    </navigator>
   </form>
   
 </view>

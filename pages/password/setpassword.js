@@ -42,11 +42,33 @@ Page({
       console.log(this.data.token)
     })
   },
+  updateUserPassword1:function(e){
+    var password=this.data.oldpassword
+    var new_password=this.data.newpassword
+    if (password==''){
+      wx.showModal({
+        content: '旧密码为空',
+        showCancel:false
+      })
+    }else if(new_password==''){
+      wx.showModal({
+        content: '新密码为空',
+        showCancel: false
+      })
+    }else{
+      this.updateUserPassword()
+    }
+  },
 
   //修改密码
   updateUserPassword:function(e){
+    console.log(1111)
     var token=this.data.token
     var url=this.data.url
+    wx.showLoading({
+      title: '修改中',
+      mask:true
+    })
     wx.request({
       url: url +'/api/user/password?token='+token,
       method:'post',
@@ -58,10 +80,19 @@ Page({
         new_password:this.data.newpassword
       }, 
       success:(e)=>{
+        console.log(e.data)
         if(e.data.status==true){
           wx.clearStorage(token)
+          wx.hideLoading()
           wx.navigateTo({
             url: '/pages/login/login',
+          })
+        }else{
+          wx.hideLoading()
+          wx.showModal({
+            title: '修改失败',
+            content: e.data.data,
+            showCancel:false
           })
         }
       }

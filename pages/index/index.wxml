@@ -3,12 +3,12 @@
   <view class='title_icon' bindtap="showModal" data-target="DrawerModalL">
     <text class="iconfont icon-daohang"></text>
   </view>
-  <view class='title_text' style="display:inline-block;">
+  <view class='title_text'>
     一起记账
   </view>
 </view>
 <!-- 弹窗 -->
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal" style="top:80px;">
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal" style="top:{{navH}}px;">
   <view class="cu-dialog basis-lg">
     <view class="cu-list menu text-left">
       <view class="menu-title">
@@ -25,74 +25,76 @@
         </view>
       </scroll-view>
     </view>
-    <navigator class="content-footer" url="/pages/accountsets/account" wx:if="{{token!=''}}">
+    <navigator class="content-footer" url="/pages/accountsets/account" wx:if="{{token!=''}}" hover-class="none">
       <text class="cuIcon-settings">账簿设置</text>
     </navigator>
-    <navigator class="content-footer" url="/pages/login/login" wx:if="{{token==''}}">
+    <navigator class="content-footer" url="/pages/login/login" wx:if="{{token==''}}" hover-class="none">
       <text class="cuIcon-settings">点击登录</text>
     </navigator>
   </view>
 </view>
 
 <!--正文-->
-<view class="container" style="margin-top: {{navH}}px">
-  <view class="nav-item">
-    <view class="item">
-      <view>
-        <text class="text1">{{data.year}}年</text>
-      </view>
-      <view class="text2">
-        <picker mode="date" value="{{date}}" start="2019-01" end="2020-09" bindchange="bindDateChange" fields="month">
-          <view class="picker">
-            <!-- 当前选择: {{date}} -->
-            <text class="bt">{{data.month}}</text>
-            <text class="st">月</text>
-            <icon class="cuIcon-triangledownfill "></icon>
-          </view>
-        </picker>
+<!-- <view class="main-body" style="margin-top:{{navH}}px"> -->
+  <view class="container">
+    <view class="nav-item" style="top:{{navH}}px;">
+      <view class="item">
+        <view>
+          <text class="text1">{{data.year}}年</text>
+        </view>
+        <view class="text2">
+          <picker mode="date" value="{{date}}" start="2019-01" end="2020-09" bindchange="bindDateChange" fields="month">
+            <view class="picker">
+              <!-- 当前选择: {{date}} -->
+              <text class="bt">{{data.month}}</text>
+              <text class="st">月</text>
+              <icon class="cuIcon-triangledownfill "></icon>
+            </view>
+          </picker>
+
+        </view>
 
       </view>
-
+      <view class="item">
+        <view>
+          <text class="text1">收入</text>
+        </view>
+        <view class="text2">
+          <text class="bt">{{accountTotalIn[0]}}</text>
+          <text class="st">.{{accountTotalIn[1]}}</text>
+        </view>
+      </view>
+      <view class="item">
+        <view>
+          <text class="text1">支出</text>
+        </view>
+        <view class="text2">
+          <text class="bt">{{accountTotalOut[0]}}</text>
+          <text class="st">.{{accountTotalOut[1]}}</text>
+        </view>
+      </view>
     </view>
-    <view class="item">
-      <view>
-        <text class="text1">收入</text>
+    <view class="navior" style="top:{{navH}}px;">
+      <navigator class="item1" url="/pages/accounttype/accounttype" hover-class="none">
+        <text class="cuIcon-apps"></text>
+      </navigator>
+      <view class="item1">
+        <text class="iconfont icon-rili"></text>
       </view>
-      <view class="text2">
-        <text class="bt">{{accountTotalIn[0]}}</text>
-        <text class="st">.{{accountTotalIn[1]}}</text>
+      <view class="item1">
+        <text class="iconfont icon-zhuyuanhaozhanbi"></text>
       </view>
-    </view>
-    <view class="item">
-      <view>
-        <text class="text1">支出</text>
+      <view class="item1">
+        <text class="iconfont icon-tubiaotongji"></text>
       </view>
-      <view class="text2">
-        <text class="bt">{{accountTotalOut[0]}}</text>
-        <text class="st">.{{accountTotalOut[1]}}</text>
+      <view class="item1">
+        <text class="iconfont icon-tubiao"></text>
       </view>
     </view>
   </view>
-  <view class="navior">
-    <navigator class="item1" url="/pages/accounttype/accounttype">
-      <text class="cuIcon-apps"></text>
-    </navigator>
-    <view class="item1">
-      <text class="iconfont icon-rili"></text>
-    </view>
-    <view class="item1">
-      <text class="iconfont icon-zhuyuanhaozhanbi"></text>
-    </view>
-    <view class="item1">
-      <text class="iconfont icon-tubiaotongji"></text>
-    </view>
-    <view class="item1">
-      <text class="iconfont icon-tubiao"></text>
-    </view>
-  </view>
-</view>
+<!-- </view> -->
 <!-- 未登录状态 -->
-<view class="main" wx:if="{{token==''}}">
+<view class="main" wx:if="{{token==''}}" style="margin-top:{{navH+100}}px;">
   <view class="icon">
     <text class="cuIcon-all"></text>
   </view>
@@ -105,9 +107,9 @@
 </view>
 
 <!-- 登录状态 -->
-<view style="margin-top:210px;" wx:if="{{token!=''}}">
-<!-- 账本有数据 -->
-  <view class="mainContent" wx:for="{{pageSource}}" wx:key bindtap="showModal2" data-target="bottomModal" data-accountid='{{item.record_id}}'  data-accountbook='{{item.account_id}}' wx:if="{{pageSource.length>=0}}">
+<view wx:if="{{token!=''}}" class="Main-body" style="margin-top:{{navH+120}}px">
+  <!-- 账本有数据 -->
+  <view class="mainContent" wx:for="{{pageSource}}" wx:key bindtap="showModal2" data-target="bottomModal" data-accountid='{{item.record_id}}' data-accountbook='{{item.account_id}}' wx:if="{{pageSource.length>=0}}">
     <view class="accountdetails">
       <view class="date">
         {{item.date}}
@@ -120,8 +122,8 @@
     <view class="cu-list menu-avatar" style="width:100%;">
       <view class="cu-item">
         <view class="content">
-          <view class="text-black text-bg" style="margin-left:-50px;">
-            <icon class="cuIcon-all"></icon>
+          <view class=" con-tant text-black">
+            <icon class="cuIcon-all" style="margin-right:2%;"></icon>
             {{item.company_name}}
           </view>
         </view>
@@ -132,14 +134,14 @@
     </view>
   </view>
 
-<!-- 账本无数据 -->
-<view class="main" wx:if="{{pageSource.length==0}}">
-  <view class="icon">
-    <text class="cuIcon-all"></text>
-  </view>
-  <view class="icontext">
-    <text>还没数据，赶紧记一笔吧!</text>
-  </view>
+  <!-- 账本无数据 -->
+  <view class="main" wx:if="{{pageSource.length==0}}" style="top:{{navH+210}}px;">
+    <view class="icon">
+      <text class="cuIcon-all"></text>
+    </view>
+    <view class="icontext">
+      <text>还没数据，赶紧记一笔吧!</text>
+    </view>
   </view>
 </view>
 
@@ -153,15 +155,15 @@
     <view class="padding-xl">
       <view class="cu-form-group">
         <view class="title">修改记账金额</view>
-        <input placeholder="{{returnSource.total_money}}" bindinput="jizhang"></input>
+        <input value="{{returnSource.total_money}}" bindinput="jizhang"></input>
       </view>
       <view class="cu-form-group">
         <view class="title">修改实付金额</view>
-        <input placeholder="{{returnSource.paid_money}}" bindinput="shifu"></input>
+        <input value="{{returnSource.paid_money}}" bindinput="shifu"></input>
       </view>
       <view class="cu-form-group">
         <view class="title">修改交易对象</view>
-        <input placeholder="{{returnSource.company_name}}" bindinput="addTarget"></input>
+        <input value="{{returnSource.company_name}}" bindinput="addTarget"></input>
       </view>
       <view class="cu-form-group">
         <view class="title">修改记账日期</view>
@@ -173,7 +175,7 @@
       </view>
       <view class="cu-form-group align-start">
         <view class="title">修改账本备注</view>
-        <textarea maxlength="-1" placeholder="{{returnSource.remark}}" bindinput="remarks"></textarea>
+        <textarea maxlength="-1" value="{{returnSource.remark}}" bindinput="remarks"></textarea>
       </view>
       <view class="cu-bar bg-white margin-top">
         <view class="action">

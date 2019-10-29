@@ -16,9 +16,21 @@ Page({
     this.setData({
       feedbackcontent:e.detail.value
     })
-    console.log(this.data.feedbackcontent)
+    // console.log(this.data.feedbackcontent)
   },
 
+  uploadFeedBack1:function(){
+    var content=this.data.feedbackcontent
+    if(content==''){
+      wx.showModal({
+        title:'反馈失败',
+        content: '内容为空',
+        showCancel:false
+      })
+    }else{
+      this.uploadFeedBack()
+    }
+  },
   //提交反馈意见
   uploadFeedBack:function(){
     var token=this.data.token
@@ -39,22 +51,23 @@ Page({
       success:(e)=>{
         console.log(e.data)
         if(e.data.status==true){
-          setTimeout(function(){
             wx.hideLoading()
             wx.showToast({
               title: '反馈成功',
               icon: 'success',
-              duration: 2000
+              duration: 3000,
+              success:(e)=>{
+                wx.navigateTo({
+                  url: '/pages/index4/index4',
+                })
+              }
             })
-          },3000)
-          wx.navigateTo({
-            url: '/pages/index4/index4',
-          })
+          
         }else{
-          wx.showToast({
+          wx.showModal({
             title: '反馈失败',
-            icon: 'success',
-            duration: 2000
+            content: e.data.data,
+            showCancel:false
           })
         }
       }

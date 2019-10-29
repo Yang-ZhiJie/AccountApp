@@ -30,41 +30,11 @@
   height: 30px;
   margin:  0 auto;
   text-align: center;
+  font-size: 20px;
   color: #fff;
-}
-
-.col{
-  height: 30px;
-  display: flex;
-  text-align: center;
-  font-size: 12px;
-}
-.col1{
-  line-height: 30px;
-  width: 50%;
-  border: 1px solid #fff;
-  background: #fff;
-  color: #5FC16D;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.col2{
-  /* flex: 1; */
-  width: 50%;
-  line-height: 30px;
-  /* height: 100%; */
-  border: 1px solid #fff;
-  /* color: #5FC16D; */
-  color: #fff;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  /* border-radius: 5px; */
-}
-.formtable{
-  margin-top: 150px;
 }
 .codeimgs{
   margin-top: 10px;
   height: 50px;
-  width: 60px;
+  width: 70px;
 }

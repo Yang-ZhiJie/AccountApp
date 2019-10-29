@@ -11,7 +11,7 @@
 </view>
 
 <!-- 周期榜 -->
-<view class="bg-white nav" style="margin-top:90px;">
+<view class="bg-white nav" style="margin-top:{{navH}}px;">
   <view class="flex text-center">
     <view class="cu-item flex-sub {{index==TabCur?'text-white cur':''}} text-white" wx:for="{{3}}" wx:key bindtap="tabSelectDate" data-id="{{index}}">
       {{selectDate[index]}}

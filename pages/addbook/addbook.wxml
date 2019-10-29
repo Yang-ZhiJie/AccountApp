@@ -1,18 +1,18 @@
 <!--pages/addbook/addbook.wxml-->
 <!--pages/accountbook/accountbook.wxml-->
 <view class='nav' style='height:{{navH}}px'>
-  <navigator class='title_icon' url="/pages/accountsets/account">
-    <icon class="cuIcon-back"></icon>
-    <text class="titlefont">返回</text>
+  <navigator class='title_icon' url="/pages/accountsets/account" hover-class="none">
+      <icon class="cuIcon-back"></icon>
+      <text class="titlefont">返回</text>
   </navigator>
   <view class='title_text'>
-    账簿设置
+    账簿添加
   </view>
 </view>
 <view class="main">
   <view class="cu-form-group">
-    <view class="title">账本名称</view>
-    <input placeholder="账本名称" class="inputname" bindinput="bookName">
+    <view class="title">账簿名称</view>
+    <input placeholder="账簿名称" class="inputname" bindinput="bookName">
     </input>
   </view>
   <view class="padding flex flex-direction">

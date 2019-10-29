@@ -1,39 +1,39 @@
 /* pages/addbook/addbook.wxss */
 .nav {
   width: 100%;
-  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
   height: 80px;
   background:#3AB44A;
-  text-align: center;
 }
 
 .title_text {
-  margin-top: 50px;
+  /* z-index: 99; */
+  display:block;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* z-index: 10; */
   font-size: 20px;
   color: #fff;
-  display: inline-block;
 }
  
 .title_icon {
-  margin-left: 10px;
-  margin-top: 50px;
   position: absolute;
-  
+  bottom: 10px;
+  /* left: 20px; */
+  box-sizing: border-box;
+  z-index: 20;
 }
-.title_icon .cuIcon-back{
-  font-size: 20px;
+.title_icon text{
+  font-size: 35rpx;
   color: #fff;
-  padding-right: 5px;
-  /* font-weight: bolder; */
-}
-.title_icon .titlefont{
-  position: absolute;
-  margin-top:4px;
-  font-size: 16px;
-  color: #fff;
+  font-weight: bolder;
 }
 .cuIcon-titles{
   color: #3AB44A;
@@ -85,8 +85,10 @@
   margin-top:100px;
 }
 .inputname{
-  margin-left: 220px;
+  /* margin-left: 220px; */
+  position: absolute;
+  right: -20%;
 }
 .inputmoney{
-  margin-left: 220px;
+  /* margin-left: 220px; */
 }

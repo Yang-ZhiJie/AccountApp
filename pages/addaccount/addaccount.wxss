@@ -1,18 +1,15 @@
 /* pages/addaccount/addaccount.wxss */
 .navContent {
   width: 100%;
-  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-  height: 80px;
   background:#3AB44A;
   text-align: center;
-  z-index: 99
+  z-index: 200
 }
 
  .navContent .title_text {
-  margin-top: 50px;
   font-size: 20px;
   color: #fff;
   display: inline-block;
@@ -20,7 +17,8 @@
  
 .title_icon {
   margin-left: 10px;
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  /* line-height: 80px; */
   position: absolute;
 }
 .title_icon .cuIcon-back{
@@ -37,7 +35,8 @@
 }
 .main {
   width: 100%;
-  height: 700px;
+  /* height: 700px; */
+  margin-top: 30%;
   background: #f1f1f1;
   /* margin-top: 110px; */
 }
@@ -59,4 +58,11 @@
   color: #aaa;
   margin-top: -150px;
   text-align: center;
+}
+.nav{
+  position: fixed;
+}
+.cu-list{
+  position: absolute;
+  width: 100%;
 }

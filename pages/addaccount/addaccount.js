@@ -30,7 +30,7 @@ Page({
     picker: '',
     pickerIndex: '',
     bookId: '',
-    typeId:''
+    typeId: ''
   },
   showModal(e) {
     this.setData({
@@ -153,19 +153,19 @@ Page({
     })
     // console.log(this.data.accountId)
     app.getToken((token) => {
-      if(token!=null){
+      if (token != null) {
         that.setData({
           token: token
         })
         this.getType()
         this.getData()
-      }else{
+      } else {
         that.setData({
           token: ''
         })
         return
       }
-      
+
     })
 
   },
@@ -310,16 +310,48 @@ Page({
       addremarks: e.detail.value
     })
   },
+  uploadAccountBook: function(e) {
+    var total_money = this.data.addjizhang
+    var money = this.data.addshifu
+    var date = this.data.date
+    var account_id=this.data.bookId
+    // var company_name = this.data.addtarget
+    var remark = this.data.addremarks
+    if (total_money==''){
+      wx.showModal({
+        content: '记账金额为空',
+        showCancel:false
+      })
+    } else if (money==''){
+      wx.showModal({
+        content: '实付金额为空',
+        showCancel: false
+      })
+    } else if (account_id==''){
+      wx.showModal({
+        content: '账本未选',
+        showCancel: false
+      })
+    } else if (date == '点击选择') {
+      wx.showModal({
+        content: '日期未选',
+        showCancel: false
+      })
+    }else{
+      this.uploadAccountBook1()
+    }
+  },
 
   //添加记账
-  uploadAccountBook() {
+  uploadAccountBook1() {
+    console.log(this.data.date)
     var token = this.data.token
     var url = this.data.url
     var accountid = app.globalData.accontId
     // console.log(accountid)
     wx.showLoading({
       title: '添加中...',
-      mask:'true'
+      mask: 'true'
     })
     wx.request({
       url: url + '/api/record/create?token=' + token,
@@ -337,16 +369,26 @@ Page({
         remark: this.data.addremarks,
         image_keys: this.data.imgKey
       },
-      success:(e)=>{
+      success: (e) => {
         console.log(e.data)
-        if(e.data.status==true){
-          setTimeout(()=>{
-            wx.hideLoading()
-            this.setData({
-              modalName: ''
-            })
-          },3000)
-          
+        if (e.data.status == true) {
+          wx.hideLoading()
+          wx.showToast({
+            title: '添加成功',
+            duration:3000,
+            success:(e)=>{
+              this.setData({
+                modalName: ''
+              })
+            }
+          })
+        }else{
+          wx.hideLoading()
+          wx.showModal({
+            title: '添加失败',
+            content: e.data.data,
+            showCancel:false
+          })
         }
         // this.onShow()
       }

@@ -1,7 +1,8 @@
 /* pages/footer/footer.wxss */
  .footer{
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
+  height: 40px;
   position: fixed;
   bottom: 0;
   left: 0;

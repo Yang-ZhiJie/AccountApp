@@ -12,12 +12,12 @@ Page({
     imgkey: '',
     textcode: '',
     password: '',
-    token:'',
-    url:''
+    token: '',
+    url: ''
   },
 
   //获取新的手机号码
-  phoneNum: function (e) {
+  phoneNum: function(e) {
     console.log('111')
     this.setData({
       phonenum: e.detail.value
@@ -27,14 +27,14 @@ Page({
   },
 
   //获得密码
-  passWord: function (e) {
+  passWord: function(e) {
     this.setData({
       password: e.detail.value
     })
   },
 
   // 获得图形验证码
-  getImgs: function (e) {
+  getImgs: function(e) {
 
     wx.request({
       url: "http://jizhang-api-dev.it266.com/api/captcha",
@@ -57,11 +57,30 @@ Page({
   },
 
   // 获得图形code与api进行对比验证
-  imgCode: function (e) {
+  imgCode: function(e) {
     this.setData({
       imgcode: e.detail.value
     })
     // console.log(this.data.imgcode);
+  },
+
+  getPhoneNum1:function(){
+    var password = this.data.password
+    var mobile = this.data.phonenum
+    var verify = this.data.textcode
+    if (mobile == '') {
+      wx.showModal({
+        content: '手机号为空',
+        showCancel: false
+      })
+    } else if (password == '') {
+      wx.showModal({
+        content: '密码为空',
+        showCancel: false
+      })
+    } else {
+      this.getPhoneNum()
+    }
   },
 
   // 获取手机验证码
@@ -79,44 +98,100 @@ Page({
       },
       success: (e) => {
         console.log(e.data)
+        if(e.data.status!=true){
+          wx.showModal({
+            content: '输入图形码',
+            showCancel:false,
+            success:(e)=>{
+              this.setData({
+                modalName: "bottomModal"
+              })
+              this.getImgs()
+            }
+          }) 
+        }else{
+          wx.showModal({
+            title: '验证码',
+            content: e.data.data,
+            showCancel:false
+          })
+        }
       },
     })
   },
 
   //获得手机验证吗
-  getTextCode: function (e) {
+  getTextCode: function(e) {
     this.setData({
       textcode: e.detail.value
     })
   },
 
+  updateUserInfo1: function() {
+    var password=this.data.password
+    var mobile=this.data.phonenum
+    var verify=this.data.textcode
+    if (mobile==''){
+      wx.showModal({
+        content: '手机号为空',
+        showCancel:false
+      })
+    } else if (password==''){
+      wx.showModal({
+        content: '密码为空',
+        showCancel: false
+      })
+    } else if (verify==''){
+      wx.showModal({
+        content: '验证码为空',
+        showCancel: false
+      })
+    }else{
+      this.updateUserInfo()
+    }
+  },
+
   //修改手机号码
-  updateUserInfo:function(){
-    var url=this.data.url
-    var token=this.data.token
-    console.log(token)
+  updateUserInfo: function() {
+    var url = this.data.url
+    var token = this.data.token
+    // console.log(token)
+    wx.showLoading({
+      title: '修改中...',
+      mask:true
+    })
     wx.request({
-      url: url +'/api/user/mobile?token='+token,
-      method:'post',
+      url: url + '/api/user/mobile?token=' + token,
+      method: 'post',
       header: {
         "content-type": "application/x-www-form-urlencoded"
       },
-      data:{
-        password:this.data.password,
-        mobile:this.data.phonenum,
-        verify:this.data.textcode
+      data: {
+        password: this.data.password,
+        mobile: this.data.phonenum,
+        verify: this.data.textcode
       },
-      success:(e)=>{
+      success: (e) => {
         console.log(e.data)
-        if(e.data.status==true){
+        if (e.data.status == true) {
+          wx.hideLoading()
           wx.showToast({
             title: '修改成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            success:(e)=>{
+              wx.clearStorage(token)
+            }
           })
-          wx.clearStorage(token)
           wx.navigateTo({
             url: '/pages/login/login',
+          })
+        }else{
+          wx.hideLoading()
+          wx.showModal({
+            title: '修改失败',
+            content: e.data.data,
+            showCancel:false
           })
         }
       }
@@ -125,12 +200,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  
-  onLoad: function (options) {
+
+  onLoad: function(options) {
     // var that = this;
     this.setData({
       navH: app.globalData.navHeight,
-      url:app.globalData.url
+      url: app.globalData.url
     })
     app.getToken((token) => {
       console.log(token)
@@ -139,55 +214,55 @@ Page({
       })
       // console.log(this.data.token)
     })
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

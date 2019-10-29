@@ -40,14 +40,29 @@ Page({
       }
     })
   },
-
-  //删除账户
-  deleteAccount: function (e) {
-    console.log('1111')
+  deleteAccount1:function(e){
     this.setData({
       accountId: e.currentTarget.dataset.accountid
     })
-    console.log(this.data.accountId)
+    wx.showModal({
+      title: '尊敬的用户',
+      content: '确认删除吗',
+      success: (e) => {
+        if (e.confirm == true) {
+          this.deleteAccount()
+        }else if(e.cancel==true){
+          this.onLoad();
+        }
+      }
+    })
+  },
+
+  //删除账户
+  deleteAccount: function (e) {
+    
+    // console.log('1111')
+    
+    // console.log(this.data.accountId)
     var token = this.data.token
     var id = this.data.accountId
     var url = this.data.url
@@ -59,7 +74,15 @@ Page({
       },
       success: (e) => {
         // console.log(e)
-        this.onShow()
+        if(e.data.status==true){
+          wx.showToast({
+            title: '删除成功',
+            duration:2000,
+            success:(e)=>{
+              this.onShow()
+            }
+          })
+        }
       }
     })
     //  console.log(this.data.accountId)

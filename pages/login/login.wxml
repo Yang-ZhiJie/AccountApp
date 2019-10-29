@@ -1,22 +1,17 @@
 <!--pages/login/login.wxml-->
 <view class='nav-content' style='height:{{navH}}px;'>
   <view class="nav-content-bottom">
-    <navigator class='title_icon' url="/pages/index4/index4">
+    <navigator class='title_icon' url="/pages/index4/index4" open-type="redirect" hover-class="none">
       <icon class="cuIcon-back"></icon>
     </navigator>
     <view class='title_text'>
-      <view class="col">
-        <view class="col1">
-          <text>登录</text>
-        </view>
-        <view class="col2">
-          <text>注册</text>
-        </view>
-      </view>
+
+          登录
+
     </view>
   </view>
 </view>
-<view class="formtable">
+<view class="formtable" style="margin-top:{{navH+10}}px;">
   <form class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
     <view class="cu-form-group card-menu">
       <view class="title">手机号</view>
@@ -26,14 +21,13 @@
       <view class="title">登录密码</view>
       <input placeholder="输入密码" password="true" bindinput="passWord"></input>
     </view>
-    <view class="cu-form-group">
+    <view class="cu-form-group" wx:if="{{modalName=='bottomModal'?'show':''}}">
       <view class="title">图形验证码</view>
       <input placeholder="图片内容" bindinput="imgCode"></input>
       <image class="codeimgs" src="{{imgsurl}}"></image>
-      <button class="cu-btn bg-green shadow" role="button" aria-disabled="false" bindtap="getImgs">点击获取</button>
     </view>
-    <view class="padding flex flex-direction margin-top">
-    <button class="cu-btn bg-green margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goLogin">点击登录</button>
+    <view class="padding flex flex-direction">
+    <button class="cu-btn bg-green margin-tb-sm lg" role="button" aria-disabled="false" bindtap="goLogin1">点击登录</button>
     </view>
   </form>
   

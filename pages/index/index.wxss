@@ -1,17 +1,12 @@
 .nav {
   width: 100%;
-  /* overflow: hidden; */
   position: fixed;
   top: 0;
   left: 0;
-  /* z-index: 10; */
   background:#3AB44A;
-  /* display: flex; */
-
 }
-
-
 .title_text {
+  display: inline-block;
   width: 100%;
   height: 45px;
   line-height: 45px;
@@ -43,7 +38,7 @@
   height: 80px;
   display: flex;
   position: fixed;
-  top: 90px;
+  /* top: 90px; */
   /* z-index: -10; */
 }
 .navior{
@@ -51,7 +46,7 @@
   height: 80px;
   display: flex;
   position: fixed;
-  top: 90px;
+  /* top: 90px; */
 }
 .nav-item .item{
   flex: 1;
@@ -101,9 +96,9 @@
 }
 .main{
   width: 100%;
-  height: 700px;
+  /* height: 700px; */
   background: #F1F1F1;
-  margin-top: 210px;
+  /* margin-top: 210px; */
 }
 .main .icontent{
   width: 80%;
@@ -146,13 +141,36 @@ text-align: center;
 }
 .content-footer{
   width: 90%;
+  height: 30px;
   border: 1px solid #3AB44A;
+  border-radius: 10px;
   float: left;
   margin-left: 12px;
-  margin-top:95%;
+  position: fixed;
+  bottom: 20px;
+  /* margin-top:99%; */
   text-align: center;
   color: #3AB44A;
 }
+.cuIcon-settings{
+  line-height: 30px;
+  font-size: 16px;
+}
+
+.Main-body{
+  position: absolute;
+  width: 100%;
+  /* display: flex; */
+  /* top: 210rpx; */
+  /* margin-top: 210px; */
+}
+
+.con-tant{
+  margin-left: -25%;
+  text-align: center;
+  line-height: 70rpx;
+}
+
 .mainContent .accountdetails{
   height: 30px;
   width: 100%;

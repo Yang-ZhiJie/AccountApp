@@ -15,7 +15,8 @@ Page({
     accountId: '',
     url:'',
     getbookid:'',
-    setbookname:''
+    setbookname:'',
+    bookid:''
   },
 
   //加载页面数据
@@ -129,12 +130,27 @@ Page({
     // console.log(e)
   },
 
-  //修改账簿
   updateBook:function(e){
+    var book_name=this.data.setbookname
+    if (book_name==''){
+      wx.showModal({
+        content: '账簿名称为空',
+        showCancel:false
+      })
+    }else{
+      this.updateBook1()
+    }
+  },
+  //修改账簿
+  updateBook1:function(e){
     var token = this.data.token
     var id = this.data.getbookid
     var url = this.data.url
-    console.log(id)
+    // console.log(id)
+    wx.showLoading({
+      title: '修改中...',
+      mask:true
+    })
     wx.request({
       url: url +'/api/book/update?token='+token,
       method: 'post',
@@ -148,9 +164,39 @@ Page({
       success:(e)=>{
         console.log(e.data)
         if(e.data.status==true){
-          this.setData({
-            modalName:''
+          wx.hideLoading()
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration:2000,
+            success:(e)=>{
+              this.setData({
+                modalName: ''
+              })
+              this.onLoad()
+            }
+          })    
+        }else{
+          wx.showModal({
+            title: '修改失败',
+            content: e.data.data,
           })
+        }
+      }
+    })
+  },
+
+  deleteBook:function(e){
+    this.setData({
+      bookid :e.currentTarget.dataset.bookid
+    })
+    wx.showModal({
+      title: '尊敬的用户',
+      content: '确认要删除吗',
+      success:(e)=>{
+        if(e.confirm==true){
+          this.deleteBook1()
+        }else if(e.cancel){
           this.onLoad()
         }
       }
@@ -158,11 +204,10 @@ Page({
   },
 
   //删除账簿
-  deleteBook:function(e){
-    var id=e.currentTarget.dataset.bookid
+  deleteBook1:function(e){
     var token = this.data.token
     var url = this.data.url
-    console.log(id)
+    // console.log(id)
     wx.request({
       url: url +'/api/book/delete?token='+token,
       method: 'post',
@@ -170,7 +215,7 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       data:{
-        book_id:id
+        book_id:this.data.bookid
       },
       success:(e)=>{
         console.log(e.data)

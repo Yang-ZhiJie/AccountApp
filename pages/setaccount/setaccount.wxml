@@ -1,10 +1,10 @@
 <!--pages/setaccount/setaccount.wxml-->
 <view class='navContent' style='height:{{navH}}px;z-index:99'>
-  <navigator class='title_icon' url="/pages/index/index">
+  <navigator class='title_icon' url="/pages/index4/index4" style="line-height:{{navH+15}}px;" hover-class="none" open-type="redirect">
     <icon class="cuIcon-back"></icon>
     <text class="titlefont">返回</text>
   </navigator>
-  <view class='title_text'>
+  <view class='title_text' style="line-height:{{navH+20}}px;">
     账户设置
   </view>
 </view>
@@ -17,7 +17,7 @@
   </view>
 </view> -->
 
-  <view class="cu-list menu-avatar" style="margin-top:80px;" wx:if="{{token!=''}}">
+  <view class="cu-list menu-avatar" style="margin-top:{{navH}}px;" wx:if="{{token!=''}}">
     <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" wx:for="{{accountList}}" wx:key>
 
       <view class="content">
@@ -33,7 +33,7 @@
       <view class="move">
         <!-- <view class="bg-white text-grey">成员</view> -->
         <view class="bg-grey" data-accountid='{{item.id}}' bindtap="updateAccount" data-target="bottomModal">修改</view>
-        <view class="bg-red" bindtap="deleteAccount" data-accountid='{{item.id}}'>删除</view>
+        <view class="bg-red" bindtap="deleteAccount1" data-accountid='{{item.id}}'>删除</view>
       </view>
     </view>
   </view>
@@ -54,7 +54,7 @@
 </view>
 
 
-
+<view class="nonebox"></view>
 
 
 

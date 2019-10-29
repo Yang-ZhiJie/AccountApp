@@ -1,7 +1,6 @@
 /* pages/accountbook/accountbook.wxss */
 .nav {
   width: 100%;
-  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,27 +10,25 @@
 }
 
 .title_text {
-  margin-top: 50px;
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   display: inline-block;
 }
  
 .title_icon {
   margin-left: 10px;
-  margin-top: 50px;
   position: absolute;
   
 }
 .title_icon .cuIcon-back{
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   padding-right: 5px;
   /* font-weight: bolder; */
 }
 .title_icon .titlefont{
   position: absolute;
-  margin-top:4px;
+  /* margin-top:4px; */
   font-size: 16px;
   color: #fff;
 }
@@ -39,54 +36,14 @@
   color: #3AB44A;
   font-size: 18px;
   margin-left: 15px;
-}.nav {
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 80px;
-  /* z-index: 10; */
-  background:#3AB44A;
-  text-align: center;
-}
-
-.title_text {
-  margin-top: 50px;
-  font-size: 20px;
-  color: #fff;
-  display: inline-block;
-}
- 
-.title_icon {
-  margin-left: 10px;
-  margin-top: 50px;
-  position: absolute;
-  
-}
-.title_icon .cuIcon-back{
-  font-size: 20px;
-  color: #fff;
-  padding-right: 5px;
-  /* font-weight: bolder; */
-}
-.title_icon .titlefont{
-  position: absolute;
-  margin-top:4px;
-  font-size: 16px;
-  color: #fff;
-}
-.cuIcon-titles{
-  color: #3AB44A;
-  font-size: 18px;
-  margin-left: 15px;
-}
-.main{
-  margin-top:100px;
 }
 .inputname{
-  margin-left: 220px;
+  width: 25%;
+  position: absolute;
+  right: 0;
 }
 .inputmoney{
-  margin-left: 220px;
+  width: 25%;
+  position: absolute;
+  right: 0;
 }

@@ -82,7 +82,6 @@ Page({
         for (let i in dataList) {
           arr.push(dataList[i])
         }
-
         this.setData({
           accountList: arr,
           accountListId: arr[0].id
@@ -348,9 +347,22 @@ Page({
       }
     })
   },
+  deleteAcoount:function(e){
+    wx.showModal({
+      title: '尊敬的用户',
+      content: '确认删除吗',
+      success:(e)=>{
+        if(e.confirm==true){
+          this.deleteAcoount1()
+        }else if(e.cancel==true){
+          this.onLoad()
+        }
+      }
+    })
+  },
 
   //删除记账
-  deleteAcoount: function(e) {
+  deleteAcoount1: function(e) {
     console.log(this.data.accountId)
     var url = this.data.url
     var token = this.data.token
@@ -373,12 +385,39 @@ Page({
       }
     })
   },
+  updateAccountBook:function(e){
+    var total_money=this.data.addjizhang //记账金额
+    var company_name= this.data.addtarget //交易对象
+    var remark= this.data.addremarks
+    if (total_money==''){
+      wx.showModal({
+        content: '记账金额为空',
+        showCancel:false
+      })
+    } else if (company_name==''){
+      wx.showModal({
+        content: '交易对象为空',
+        showCancel: false
+      })
+    } else if (remark==''){
+      wx.showModal({
+        content: '备注为空',
+        showCancel: false
+      })
+    }else{
+      this.updateAccountBook1()
+    }
+  },
 
   //修改记账 step-1
-  updateAccountBook: function(e) {
+  updateAccountBook1: function(e) {
     var url = this.data.url
     var token = this.data.token
     var id = this.data.accountId
+    wx.showLoading({
+      title: '修改中...',
+      mask:true
+    })
     wx.request({
       url: url + '/api/record/update?id=' + id + '&token=' + token,
       method: "post",
@@ -393,22 +432,49 @@ Page({
       success: (e) => {
         console.log(e.data)
         if(e.data.status==true){
+          wx.hideLoading()
           wx.showToast({
             title: '修改成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            success:(e)=>{
+              this.setData({
+                modalName: ''
+              })
+              this.onLoad()
+            }
           })
-          this.setData({
-            modalName:''
+        }else{
+          wx.hideLoading()
+          wx.showModal({
+            title: '修改失败',
+            content: e.data.data,
+            showCancel:false
           })
-          this.onLoad()
         }
       }
     })
   },
+  uploadAccountBook:function(e){
+   var money=this.data.addshifu
+    var date= this.data.adddate
+   if(money==''){
+     wx.showModal({
+       content: '实付金额为空',
+       showCancel:false
+     })
+   }else if(date==''){
+     wx.showModal({
+       content: '日期未选',
+       showCancel: false
+     })
+   }else{
+     this.uploadAccountBook1()
+   }
+  },
 
   //修改记账 step-2
-  uploadAccountBook: function(e) {
+  uploadAccountBook1: function(e) {
     var url = this.data.url
     var token = this.data.token
     // var account_id = this.data.accountListId
@@ -433,19 +499,18 @@ Page({
       success:(e)=>{
         console.log(e.data)
         if(e.data.status==true){
-          setTimeout(function () {
             wx.hideLoading()
             wx.showToast({
               title: '点击确认完成',
               icon: 'success',
-              duration: 3000
+              duration: 3000,
             })
-          },3000)
         }else if(e.data.data!='修改记账单条记录成功'){
-          wx.showToast({
-            title: '收付大于帐面金额',
-            icon: 'error',
-            duration: 2000
+          wx.hideLoading()
+          wx.showModal({
+            title: '修改实付金额失败',
+            content: e.data.data,
+            showCancel:false
           })
         }
       }

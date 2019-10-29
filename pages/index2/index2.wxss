@@ -1,7 +1,6 @@
 /* pages/index2/index2.wxss */
 .nav-content {
   width: 100%;
-  /* overflow: hidden; */
   position: fixed;
   top: 0;
   left: 0;
@@ -61,7 +60,7 @@
   /* border-radius: 5px; */
 }
 .date-list{
-  margin-top: 200px;
+  /* margin-top: 200px; */
 }
 .cu-item-font{
   color: #69696A;

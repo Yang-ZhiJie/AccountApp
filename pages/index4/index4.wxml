@@ -13,17 +13,17 @@
   <!-- 状态栏 -->
   <view class="padding flex text-center text-grey bg-white shadow-warp">
     <view class="flex flex-sub flex-direction solid-right">
-      <view class="text-xxl text-orange">{{visitTotal}}</view>
+      <view class="text-xxl text-orange">0</view>
       <view class="margin-top-sm">
         已邀请</view>
     </view>
     <view class="flex flex-sub flex-direction solid-right">
-      <view class="text-xxl text-blue">{{starCount}}</view>
+      <view class="text-xxl text-blue">{{accountList}}</view>
       <view class="margin-top-sm">
-        总账本</view>
+        总账簿</view>
     </view>
     <view class="flex flex-sub flex-direction">
-      <view class="text-xxl text-green">{{forksCount}}</view>
+      <view class="text-xxl text-green">{{pageSource}}</view>
       <view class="margin-top-sm">
         共记账</view>
     </view>

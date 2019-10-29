@@ -1,14 +1,14 @@
 <!--pages/accounttype/accounttype.wxml-->
 <view class='navContent' style='height:{{navH}}px;z-index:99'>
-  <navigator class='title_icon' url="/pages/index/index">
+  <navigator class='title_icon' url="/pages/index/index" style="line-height:{{navH+15}}px;" hover-class="none">
     <icon class="cuIcon-back"></icon>
     <text class="titlefont">返回</text>
   </navigator>
-  <view class='title_text'>
+  <view class='title_text' style="line-height:{{navH+20}}px;">
     个人账本-类别设置
   </view>
 </view>
-<scroll-view scroll-x class="bg-white nav text-center" style="position:fixed;top:90px;z-index:99">
+<scroll-view scroll-x class="bg-white nav text-center" style="top:{{navH}}px;">
   <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{way}}" wx:key bindtap="tabSelect" data-id="{{index}}" style="width:120px;">
     {{way[index]}}
   </view>
@@ -28,8 +28,8 @@
 </view>
 
 <!-- 登录状态 -->
-<scroll-view wx:if="{{token!=''}}">
-  <view class="cu-list menu-avatar" style="margin-top:140px;">
+<view wx:if="{{token!=''}}">
+  <view class="cu-list menu-avatar" style="margin-top:{{navH+45}}px;">
     <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{accounttype}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
       <view class="cu-avatar round">
         <view class="cuIcon-sort text-gray"></view>
@@ -46,7 +46,7 @@
       </view>
     </view>
   </view>
-</scroll-view>
+</view>
 <view class="row" wx:if="{{token!=''}}">
     <view class="col">
       <view class="col1">

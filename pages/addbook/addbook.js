@@ -49,8 +49,24 @@ Page({
 
   //添加账簿
   addAccountBook:function(e){
+   var name=this.data.bookname
+   if(name==''){
+     wx.showModal({
+       content: '账簿名为空',
+       showCancel:false
+     })
+   }else{
+     this.addAccountBook1()
+   }
+  },
+  
+  addAccountBook1:function(e){
     var token=this.data.token
     var url=this.data.url
+    wx.showLoading({
+      title: '添加中...',
+      mask: true
+    })
     wx.request({
       url: url +'/api/book/create?token='+token,
       method:'post',
@@ -63,25 +79,30 @@ Page({
       success:(e)=>{
         console.log(e.data)
         if(e.data.status==true){
+          wx.hideLoading()
           wx.showToast({
             title: '创建成功',
             icon: 'success',
             duration: 2000,
+            success:(e)=>{
+              wx.navigateTo({
+                url: '/pages/accountsets/account',
+              })
+            }
           })
-          wx.navigateBack({
-            delta:4
-          })
-
-        } else if (e.data.status == false){
+        } else{
+          wx.hideLoading()
           wx.showModal({
-            title: '创建失败',
+            title: '添加失败',
             content: e.data.data,
-            // success(res) {
-            //   console.log(res);
-            // }
+            showCancel:false,
+            success:(res)=>{
+              wx.navigateTo({
+                url: '/pages/accountsets/account',
+              })
+            }
           })
           return
-
         }
         
       }

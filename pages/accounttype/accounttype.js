@@ -16,12 +16,26 @@ Page({
     typenum: '',
     typename: ''
   },
-
-  //删除类别
-  delType: function(e) {
+  delType:function(e){
     this.setData({
       typeid: e.currentTarget.dataset.typeid
     })
+    wx.showModal({
+      title: '尊敬的用户',
+      content: '确认删除吗',
+      success:(e)=>{
+        if(e.confirm==true){
+          this.delType1()
+        }else if(e.cancel==true){
+          this.onLoad()
+        }
+      }
+    })
+  },
+
+  //删除类别
+  delType1: function(e) {
+    
     var token = this.data.token
     var url = this.data.url
     var id = this.data.typeid

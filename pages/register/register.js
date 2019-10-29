@@ -13,15 +13,15 @@ Page({
     username: '',
     textcode: '',
     password: '',
-    show:0
+    show: 0
   },
   // 获取手机号
   phoneNum: function(e) {
-    console.log('111') 
-      this.setData({
-        phonenum: e.detail.value
-      })
-    
+    console.log('111')
+    this.setData({
+      phonenum: e.detail.value
+    })
+
     console.log(this.data.phonenum);
   },
   // 获得图形验证码
@@ -72,7 +72,36 @@ Page({
     })
   },
   // 获取手机验证码
-  getPhoneNum(e) {
+  getPhoneNum1:function(e) {
+    var mobile = this.data.phonenum
+    var verify = this.data.textcode
+    var password = this.data.password
+    var nikename = this.data.username
+    if (mobile == '') {
+      wx.showModal({
+        content: '手机号为空',
+        showCancel: false
+      })
+    } else if (nikename == '') {
+      wx.showModal({
+        content: '用户名为空',
+        showCancel: false
+      })
+    } else if (password == '') {
+      wx.showModal({
+        content: '密码为空',
+        showCancel: false
+      })
+    } else {
+      this.setData({
+        modalName: 'bottomModal'
+      })
+      // this.getImgs()
+      this.getPhoneNum()
+    }
+  },
+
+  getPhoneNum:function(e){
     wx.request({
       url: 'http://jizhang-api-dev.it266.com/api/sms/verify',
       method: "post",
@@ -86,11 +115,60 @@ Page({
       },
       success: (e) => {
         console.log(e.data)
+        if (e.data.status == true) {
+          // wx.hideLoading()
+          wx.showModal({
+            title: '输入验证码',
+            content: e.data.data,
+            showCancel: false
+          })
+        } else {
+          // wx.hideLoading()
+          wx.showModal({
+            content: '输入图形码',
+            showCancel: false
+          })
+          this.getImgs()
+        }
       },
     })
   },
+
+  goRegister1: function(e) {
+    var mobile = this.data.phonenum
+    var verify = this.data.textcode
+    var password = this.data.password
+    var nikename = this.data.username
+    if (mobile == '') {
+      wx.showModal({
+        content: '手机号为空',
+        showCancel: false
+      })
+    } else if (verify == '') {
+      wx.showModal({
+        content: '验证码为空',
+        showCancel: false
+      })
+    } else if (password == '') {
+      wx.showModal({
+        content: '密码为空',
+        showCancel: false
+      })
+    } else if (nikename == '') {
+      wx.showModal({
+        content: '用户名为空',
+        showCancel: false
+      })
+    } else {
+      this.goRegister()
+    }
+  },
   //手机号注册
   goRegister: function(e) {
+    wx.showLoading({
+      title: '注册中...',
+      mask:false
+    })
     wx.request({
       url: 'http://jizhang-api-dev.it266.com/api/user/register',
       method: 'post',
@@ -109,14 +187,26 @@ Page({
       },
       success: (e) => {
         console.log(e.data)
-        if(e.data.status==true){
+        if (e.data.status == true) {
+          wx,wx.hideLoading()
           wx.showToast({
-            title: '成功',
+            title: '注册成功',
             icon: 'success',
             duration: 2000,
           })
-          this.setData({
-            show:1
+          wx.setStorage({
+            key: 'token',
+            data: e.data.data.token,
+          })
+          wx.navigateTo({
+            url: '/pages/index/index',
+          })
+        }else{
+          wx, wx.hideLoading()
+          wx.showModal({
+            title: '注册失败',
+            content: e.data.data,
+            showCancel:false
           })
         }
       }

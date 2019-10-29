@@ -1,25 +1,25 @@
 <!--pages/infomation/userinfo.wxml-->
 <view class='nav-content' style='height:{{navH}}px;'>
   <view class="nav-content-bottom">
-    <navigator class='title_icon' url="/pages/index4/index4">
+    <navigator class='title_icon' url="/pages/index4/index4" open-type="redirect" hover-class="none" style="line-height:{{navH+15}}px;">
       <icon class="cuIcon-back"></icon>
     </navigator>
-    <view class='title_text'>
+    <view class='title_text' style="line-height:{{navH+20}}px;">
       个人信息
     </view>
   </view>
 </view>
 
 <!-- 头像和用户名 -->
-<view class="cu-list menu-avatar" style="margin-top:130px;">
-  <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{1}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+<view class="cu-list menu-avatar" style="margin-top:{{navH+20}}px;">
+  <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{1}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" bindtap="showModal" data-target="bottomModal">
     <view class="cu-avatar round lg" style="background-image:url({{imgs}});"></view>
     <view class="content">
       <view class="text-grey">{{nickname}}</view>
     </view>
     <view class="move">
       <!-- <view class="bg-grey">修改信息</view> -->
-      <view class="bg-red" bindtap="showModal" data-target="bottomModal">修改信息</view>
+      <view class="bg-red">修改信息</view>
     </view>
   </view>
 </view>

@@ -1,16 +1,16 @@
 <!--pages/feedback/feedback.wxml-->
 <view class='navContent' style='height:{{navH}}px;z-index:99'>
-  <navigator class='title_icon' url="/pages/index/index">
+  <navigator class='title_icon' url="/pages/index4/index4" open-type="redirect" hover-class="none" style="line-height:{{navH+15}}px;">
     <icon class="cuIcon-back"></icon>
     <text class="titlefont">返回</text>
   </navigator>
-  <view class='title_text'>
+  <view class='title_text' style="line-height:{{navH+20}}px;">
     意见反馈
   </view>
 </view>
-<view class="cu-form-group" style="margin-top:100px;">
+<view class="cu-form-group" style="margin-top:{{navH+10}}px;">
 		<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaAInput" placeholder="感谢您的每一条意见和建议，如果被采纳，将有机会获得终身最高福利奖励"></textarea>
 	</view>
   <view class="padding flex flex-direction">
-  <button class="cu-btn bg-green lg" bindtap="uploadFeedBack">提交</button>
+  <button class="cu-btn bg-green lg" bindtap="uploadFeedBack1">提交</button>
 </view>

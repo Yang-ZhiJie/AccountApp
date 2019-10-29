@@ -81,13 +81,55 @@ Page({
         if(e.data.status==true){
           setTimeout(function(){
             wx.hideLoading()
-            wx.navigateBack({
-              url: 'pages/accountsets/account'
+            wx.navigateTo({
+              url: '/pages/setaccount/setaccount'
             })
-          },3000)
+          },2000)
+         
+        }else{
+          wx.hideLoading()
+          wx.showModal({
+            // title: '不能为空',
+            content: e.data.data,
+            showCancel: false
+          })
+        }
+      },
+      fail:(e)=>{
+        if(e.data.status!=true){
+          
         }
       }
     })
+  },
+  addAccountBook1:function(e){
+    //  判断输入框是否为空
+    var name = this.data.accountname
+    var type = this.data.pickerId
+    var initial_balance = this.data.accountmoney
+    var remark = this.data.accountremarks
+    // 账本名称是否为空
+    if (name == '') {
+      wx.showModal({
+        content: '名称不能为空',
+        showCancel: false
+      })
+      // 账本金额是否为空
+    } else if (initial_balance == '') {
+      wx.showModal({
+        content: '金额不能为空',
+        showCancel: false
+      })
+      //账本类型是否为空
+    } else if (type == '') {
+      wx.showModal({
+        content: '请选择类别',
+        showCancel: false
+      })
+    }else{
+      this.addAccountBook()
+    }
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

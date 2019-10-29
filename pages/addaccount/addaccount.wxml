@@ -1,14 +1,14 @@
 <!--pages/addaccount/addaccount.wxml-->
 <view class='navContent' style='height:{{navH}}px'>
-  <navigator class='title_icon' url="/pages/index/index" open-type="redirect">
+  <navigator class='title_icon' url="/pages/index/index" open-type="redirect" style="line-height:{{navH+12}}px;" hover-class="none">
     <icon class="cuIcon-back"></icon>
     <text class="titlefont">返回</text>
   </navigator>
-  <view class='title_text'>
+  <view class='title_text' style="line-height:{{navH+20}}px;">
     记一笔
   </view>
 </view>
-<scroll-view scroll-x class="bg-white nav text-center" style="margin-top:90px;">
+<scroll-view scroll-x class="bg-white nav text-center" style="top:{{navH}}px;">
   <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{way}}" wx:key bindtap="tabSelect" data-id="{{index}}" style="width:120px;">
     {{way[index]}}
   </view>
@@ -28,7 +28,7 @@
 </view>
 
 <!-- 登录状态 -->
-<view class="cu-list grid col-{{gridCol}} {{gridBorder}}" style="margin-top:20px;" wx:if="{{token!=''}}">
+<view class="cu-list grid col-{{gridCol}} {{gridBorder}}" wx:if="{{token!=''}}" style="margin-top:{{navH+60}}px;">
   <view class="cu-item" wx:for="{{accounttype}}" wx:key bindtap="showModal" data-target="bottomModal" data-typeid="{{item.id}}">
     <view class="cuIcon-all text-gray">
     </view>

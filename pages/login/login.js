@@ -66,31 +66,30 @@ Page({
       password: e.detail.value
     })
   },
-  //获得手机验证吗
-  getTextCode: function (e) {
-    this.setData({
-      textcode: e.detail.value
-    })
+
+  goLogin1:function(e){
+    var mobile=this.data.phonenum
+    var password=this.data.password
+    if (mobile==''){
+      wx.showModal({
+        content: '手机号为空',
+        showCancel:false
+      })
+    } else if (password==''){
+      wx.showModal({
+        content: '密码为空',
+        showCancel: false
+      })
+    }else{
+      this.goLogin()
+    }
   },
-  // 获取手机验证码
-  getPhoneNum(e) {
-    wx.request({
-      url: 'http://jizhang-api-dev.it266.com/api/sms/verify',
-      method: "post",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        mobile: this.data.phonenum,
-        captcha_code: this.data.imgcode,
-        captcha_key: this.data.imgkey
-      },
-      success: (e) => {
-        console.log(e.data)
-      },
-    })
-  },
+
   goLogin: function (e) {
+    wx.showLoading({
+      title: '登录中',
+      mask:true
+    })
     wx.request({
       url: 'http://jizhang-api-dev.it266.com/api/user/token/mobile',
       method: 'post',
@@ -100,12 +99,13 @@ Page({
       data: {
         mobile: this.data.phonenum,
         password: this.data.password,
-        captcha_code: this.data.imgcode,
-        captcha_key: this.data.imgkey
+        // captcha_code: this.data.imgcode,
+        // captcha_key: this.data.imgkey
       },
       success: (e) => {
         console.log(e.data)
         if(e.data.status==true){
+          wx.hideLoading()
           wx.showToast({
             title: '登录成功',
             icon: 'success',
@@ -120,10 +120,11 @@ Page({
             url: '/pages/index/index',
           })
         }else{
-          wx.showToast({
-            title: '账号密码有误',
-            icon: 'success',
-            duration: 2000
+          wx.hideLoading()
+          wx.showModal({
+            title: '登录失败',
+            content: e.data.data,
+            showCancel:false
           })
           // this.onShow()
         }
